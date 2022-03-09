@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users xmlns="http://www.demandware.com/xml/impex/user/2007-09-05">
+    <user login="danmndes@gmail.com" enabled-flag="true">
+        <credentials>
+            <external-id>446acbad-2081-43c2-8899-a419b8ee6116</external-id>
+        </credentials>
+        <profile>
+            <first-name>Daniel</first-name>
+            <last-name>Mendes</last-name>
+            <email>danmndes@gmail.com</email>
+            <phone-mobile>+5585985509982</phone-mobile>
+            <preferred-data-locale>none</preferred-data-locale>
+        </profile>
+    </user>
+
+</users>
