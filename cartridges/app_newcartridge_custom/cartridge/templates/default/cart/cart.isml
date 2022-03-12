@@ -2,6 +2,7 @@
     <isscript>
         var assets = require('*/cartridge/scripts/assets.js');
         assets.addCss('/css/cart.css');
+        assets.addCss('/css/myCss.css');
     </isscript>
 
     <isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
@@ -95,7 +96,4 @@
     <div class="container">
         <isslot id="cart-recommendations-m" description="Recommended products" context="global" />
     </div>
-    <isif condition="${pdict.notes.length == 0}">
-        <h1>${Resource.msg('info.cart.user.nonotes', 'cart', null)}</h1>
-    </isif>
 </isdecorate>

@@ -129,7 +129,7 @@ function CartModel(basket) {
         minicartCountOfItems: Resource.msgf('minicart.count', 'common', null, this.numItems),
         emptyCartMsg: Resource.msg('info.cart.empty.msg', 'cart', null)
     };
-    this.notes = basket.notes;
+
 }
 
 module.exports = CartModel;
