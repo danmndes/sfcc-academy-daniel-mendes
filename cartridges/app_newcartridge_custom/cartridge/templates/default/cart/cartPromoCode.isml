@@ -1,11 +1,12 @@
 <div class="row">
-    <div class="col-12">
+    <div class="col-12 d-sm-none">
         <p class="optional-promo-custom">${Resource.msg('label.show.coupon', 'cart', null)}</p>
     </div>
 </div>
 <div class="row">
     <div class="col-12">
 
+        <input type="checkbox" id="hide"><label for="hide">${Resource.msg('label.show.coupon', 'cart', null)}</label>
 
         <form action="${pdict.actionUrls.submitCouponCodeUrl}" class="promo-code-form-custom" method="GET"
             name="promo-code-form-custom">

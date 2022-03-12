@@ -693,6 +693,19 @@ div.availability {
 }
 
 .promo-code-form-custom {
+  visibility: hidden;
+}
+
+#hide {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+#hide:checked ~ form {
+  visibility: visible;
+}
+
+#hide:checked + label {
   display: none;
 }
 
