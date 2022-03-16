@@ -1,0 +1,11 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+<isset name="myAsset" value="${dw.content.ContentMgr.getContent('desktop_banner_image')}" scope="page" />
+
+<isif condition="${myAsset && myAsset.online}">
+    <iscontentasset aid="${myAsset.ID}" />
+</isif>
+
+<iscomment>
+    Could not figure out why myAsset.custom.desktop_banner_image wasn't getting the image.
+    the code should've this part included :
+    <img src="${myAsset.custom.desktop_banner_image}" alt="${myAsset.name}" </iscomment>

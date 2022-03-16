@@ -25,7 +25,7 @@
     <index-settings>
         <full-reindexing-schedule>
             <date-from>2022-02-22Z</date-from>
-            <start-time>18:51:30.092Z</start-time>
+            <start-time>18:51:00.000Z</start-time>
             <factor>1</factor>
             <unit>days</unit>
         </full-reindexing-schedule>
