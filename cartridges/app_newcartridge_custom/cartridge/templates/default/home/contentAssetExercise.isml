@@ -1,9 +1,15 @@
 <isinclude template="/components/modules" sf-toolkit="off" />
-<isset name="myAsset" value="${dw.content.ContentMgr.getContent('desktop_banner_image')}" scope="page" />
+<isset name="desktopBanner" value="${dw.content.ContentMgr.getContent('desktop_banner_image')}" scope="page" />
+<isset name="freeShipping" value="${dw.content.ContentMgr.getContent('FreeShipping')}" scope="page" />
 
-<isif condition="${myAsset && myAsset.online}">
-    <iscontentasset aid="${myAsset.ID}" />
+<isif condition="${freeShipping && freeShipping.online}">
+    <iscontentasset aid="${freeShipping.ID}" />
 </isif>
+
+<isif condition="${desktopBanner && desktopBanner.online}">
+    <iscontentasset aid="${desktopBanner.ID}" />
+</isif>
+
 
 <iscomment>
     Could not figure out why myAsset.custom.desktop_banner_image wasn't getting the image.

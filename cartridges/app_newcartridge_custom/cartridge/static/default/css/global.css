@@ -15152,6 +15152,7 @@ a.skip:hover {
 
 .header {
   position: relative;
+  background-color: #fff;
 }
 
 .navbar-header {
@@ -15332,6 +15333,13 @@ a.normal {
   margin-top: 0;
   margin-bottom: 0.2em;
   padding-right: 2em;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
 }
 
 @media (max-width: 543.98px) {
