@@ -1,0 +1,46 @@
+@import "variables";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins/breakpoints";
+@import "utilities/deleteCardButton";
+@import "components/quickView";
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* PROMOCODE CART */
+
+.promo-code-form-custom {
+    visibility: hidden;
+}
+
+#hide {
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+#hide:checked~form {
+    visibility: visible;
+}
+
+#hide:checked+label {
+    display: none;
+}
+
+/* TRAINING FORM */
+
+#homeFormButton {
+    width: 40px;
+    height: 40px;
+}
+
+#homeFormButton a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.my-form-header {
+    height: 4.375em;
+    align-items: center !important;
+    background-color: white;
+}
