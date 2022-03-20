@@ -91,9 +91,20 @@
   !*** ./cartridges/app_newcartridge_custom/cartridge/client/default/js/mobileGridLookBook.js ***!
   \**********************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\Users\\danmn\\Desktop\\sfcc-academy-daniel-mendes\\cartridges\\app_newcartridge_custom\\cartridge\\client\\default\\js\\mobileGridLookBook.js'");
+"use strict";
+
+
+$(document).ready(function () {
+  $('body').on('click', '.show-more-button', function (e) {
+    e.preventDefault();
+    var $set2Element = $(this).closest('.look-book-layout').find('.look-book-set2');
+    $set2Element.removeClass('hide-set');
+    var $showMoreElement = $(this).closest('.look-book-layout').find('.show-more');
+    $showMoreElement.addClass('d-none');
+  });
+});
 
 /***/ })
 

@@ -91,9 +91,78 @@
   !*** ./cartridges/app_newcartridge_custom/cartridge/client/default/js/orderHistory.js ***!
   \****************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\Users\\danmn\\Desktop\\sfcc-academy-daniel-mendes\\cartridges\\app_newcartridge_custom\\cartridge\\client\\default\\js\\orderHistory.js'");
+"use strict";
+
+
+var processInclude = __webpack_require__(/*! ./util */ "./cartridges/app_newcartridge_custom/cartridge/client/default/js/util.js");
+
+$(document).ready(function () {
+  processInclude(__webpack_require__(/*! ./orderHistory/orderHistory */ "./cartridges/app_newcartridge_custom/cartridge/client/default/js/orderHistory/orderHistory.js"));
+});
+
+/***/ }),
+
+/***/ "./cartridges/app_newcartridge_custom/cartridge/client/default/js/orderHistory/orderHistory.js":
+/*!*****************************************************************************************************!*\
+  !*** ./cartridges/app_newcartridge_custom/cartridge/client/default/js/orderHistory/orderHistory.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function () {
+  $('body').on('change', '.order-history-select', function (e) {
+    var $ordersContainer = $('.order-list-container');
+    $ordersContainer.empty();
+    $.spinner().start();
+    $('.order-history-select').trigger('orderHistory:sort', e);
+    $.ajax({
+      url: e.currentTarget.value,
+      method: 'GET',
+      success: function success(data) {
+        $ordersContainer.html(data);
+        $.spinner().stop();
+      },
+      error: function error(err) {
+        if (err.responseJSON.redirectUrl) {
+          window.location.href = err.responseJSON.redirectUrl;
+        }
+
+        $.spinner().stop();
+      }
+    });
+  });
+};
+
+/***/ }),
+
+/***/ "./cartridges/app_newcartridge_custom/cartridge/client/default/js/util.js":
+/*!********************************************************************************!*\
+  !*** ./cartridges/app_newcartridge_custom/cartridge/client/default/js/util.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+module.exports = function (include) {
+  if (typeof include === 'function') {
+    include();
+  } else if (_typeof(include) === 'object') {
+    Object.keys(include).forEach(function (key) {
+      if (typeof include[key] === 'function') {
+        include[key]();
+      }
+    });
+  }
+};
 
 /***/ })
 
