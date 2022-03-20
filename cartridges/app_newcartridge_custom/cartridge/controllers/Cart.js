@@ -704,7 +704,7 @@ server.get('EditBonusProduct', function (req, res, next) {
             selectprods: Resource.msg('modal.header.selectproducts', 'product', null),
             close: Resource.msg('link.choiceofbonus.close', 'product', null)
         },
-        showProductsUrlRuleBased: URLUtils.url('Product-ShowBonusProducts', 'DUUID', bonusDiscountLineItem.UUID, 'pagesize', cartHelper.BONUS_PRODUCTS_PAGE_SIZE, 'pagestart', 0, 'maxpids', bonusDiscountLineItem.maxBonusItems).toString(),
+        showProductsUrlRuleBased: URLUtils.url('Product-ShowBonusProducts', 'DUUID', bonusDiscountLineItem.UUID, 'pagesize', cartHelper.BONUS_PRODUCTS_PAGE_SIZE, 'page', 0, 'maxpids', bonusDiscountLineItem.maxBonusItems).toString(),
         showProductsUrlListBased: URLUtils.url('Product-ShowBonusProducts', 'DUUID', bonusDiscountLineItem.UUID, 'pids', pids, 'maxpids', bonusDiscountLineItem.maxBonusItems).toString()
     });
     next();

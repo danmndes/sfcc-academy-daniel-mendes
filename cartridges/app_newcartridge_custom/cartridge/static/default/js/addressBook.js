@@ -91,9 +91,204 @@
   !*** ./cartridges/app_newcartridge_custom/cartridge/client/default/js/addressBook.js ***!
   \***************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\Users\\danmn\\Desktop\\sfcc-academy-daniel-mendes\\cartridges\\app_newcartridge_custom\\cartridge\\client\\default\\js\\addressBook.js'");
+"use strict";
+
+
+var processInclude = __webpack_require__(/*! ./util */ "./cartridges/app_newcartridge_custom/cartridge/client/default/js/util.js");
+
+$(document).ready(function () {
+  processInclude(__webpack_require__(/*! ./addressBook/addressBook */ "./cartridges/app_newcartridge_custom/cartridge/client/default/js/addressBook/addressBook.js"));
+});
+
+/***/ }),
+
+/***/ "./cartridges/app_newcartridge_custom/cartridge/client/default/js/addressBook/addressBook.js":
+/*!***************************************************************************************************!*\
+  !*** ./cartridges/app_newcartridge_custom/cartridge/client/default/js/addressBook/addressBook.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var formValidation = __webpack_require__(/*! ../components/formValidation */ "./cartridges/app_newcartridge_custom/cartridge/client/default/js/components/formValidation.js");
+
+var url;
+var isDefault;
+/**
+ * Create an alert to display the error message
+ * @param {Object} message - Error message to display
+ */
+
+function createErrorNotification(message) {
+  var errorHtml = '<div class="alert alert-danger alert-dismissible valid-cart-error ' + 'fade show" role="alert">' + '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' + '<span aria-hidden="true">&times;</span>' + '</button>' + message + '</div>';
+  $('.error-messaging').append(errorHtml);
+}
+
+module.exports = {
+  removeAddress: function removeAddress() {
+    $('.remove-address').on('click', function (e) {
+      e.preventDefault();
+      isDefault = $(this).data('default');
+
+      if (isDefault) {
+        url = $(this).data('url') + '?addressId=' + $(this).data('id') + '&isDefault=' + isDefault;
+      } else {
+        url = $(this).data('url') + '?addressId=' + $(this).data('id');
+      }
+
+      $('.product-to-remove').empty().append($(this).data('id'));
+    });
+  },
+  removeAddressConfirmation: function removeAddressConfirmation() {
+    $('.delete-confirmation-btn').click(function (e) {
+      e.preventDefault();
+      $.ajax({
+        url: url,
+        type: 'get',
+        dataType: 'json',
+        success: function success(data) {
+          $('#uuid-' + data.UUID).remove();
+
+          if (isDefault) {
+            var addressId = $('.card .address-heading').first().text();
+            var addressHeading = addressId + ' (' + data.defaultMsg + ')';
+            $('.card .address-heading').first().text(addressHeading);
+            $('.card .card-make-default-link').first().remove();
+            $('.remove-address').data('default', true);
+
+            if (data.message) {
+              var toInsert = '<div><h3>' + data.message + '</h3><div>';
+              $('.addressList').after(toInsert);
+            }
+          }
+        },
+        error: function error(err) {
+          if (err.responseJSON.redirectUrl) {
+            window.location.href = err.responseJSON.redirectUrl;
+          } else {
+            createErrorNotification(err.responseJSON.errorMessage);
+          }
+
+          $.spinner().stop();
+        }
+      });
+    });
+  },
+  submitAddress: function submitAddress() {
+    $('form.address-form').submit(function (e) {
+      var $form = $(this);
+      e.preventDefault();
+      url = $form.attr('action');
+      $form.spinner().start();
+      $('form.address-form').trigger('address:submit', e);
+      $.ajax({
+        url: url,
+        type: 'post',
+        dataType: 'json',
+        data: $form.serialize(),
+        success: function success(data) {
+          $form.spinner().stop();
+
+          if (!data.success) {
+            formValidation($form, data);
+          } else {
+            location.href = data.redirectUrl;
+          }
+        },
+        error: function error(err) {
+          if (err.responseJSON.redirectUrl) {
+            window.location.href = err.responseJSON.redirectUrl;
+          }
+
+          $form.spinner().stop();
+        }
+      });
+      return false;
+    });
+  }
+};
+
+/***/ }),
+
+/***/ "./cartridges/app_newcartridge_custom/cartridge/client/default/js/components/formValidation.js":
+/*!*****************************************************************************************************!*\
+  !*** ./cartridges/app_newcartridge_custom/cartridge/client/default/js/components/formValidation.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Remove all validation. Should be called every time before revalidating form
+ * @param {element} form - Form to be cleared
+ * @returns {void}
+ */
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function clearFormErrors(form) {
+  $(form).find('.form-control.is-invalid').removeClass('is-invalid');
+}
+
+module.exports = function (formElement, payload) {
+  // clear form validation first
+  clearFormErrors(formElement);
+  $('.alert', formElement).remove();
+
+  if (_typeof(payload) === 'object' && payload.fields) {
+    Object.keys(payload.fields).forEach(function (key) {
+      if (payload.fields[key]) {
+        var feedbackElement = $(formElement).find('[name="' + key + '"]').parent().children('.invalid-feedback');
+
+        if (feedbackElement.length > 0) {
+          if (Array.isArray(payload[key])) {
+            feedbackElement.html(payload.fields[key].join('<br/>'));
+          } else {
+            feedbackElement.html(payload.fields[key]);
+          }
+
+          feedbackElement.siblings('.form-control').addClass('is-invalid');
+        }
+      }
+    });
+  }
+
+  if (payload && payload.error) {
+    var form = $(formElement).prop('tagName') === 'FORM' ? $(formElement) : $(formElement).parents('form');
+    form.prepend('<div class="alert alert-danger" role="alert">' + payload.error.join('<br/>') + '</div>');
+  }
+};
+
+/***/ }),
+
+/***/ "./cartridges/app_newcartridge_custom/cartridge/client/default/js/util.js":
+/*!********************************************************************************!*\
+  !*** ./cartridges/app_newcartridge_custom/cartridge/client/default/js/util.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+module.exports = function (include) {
+  if (typeof include === 'function') {
+    include();
+  } else if (_typeof(include) === 'object') {
+    Object.keys(include).forEach(function (key) {
+      if (typeof include[key] === 'function') {
+        include[key]();
+      }
+    });
+  }
+};
 
 /***/ })
 

@@ -91,9 +91,96 @@
   !*** ./cartridges/app_newcartridge_custom/cartridge/client/default/js/checkoutRegistration.js ***!
   \************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\Users\\danmn\\Desktop\\sfcc-academy-daniel-mendes\\cartridges\\app_newcartridge_custom\\cartridge\\client\\default\\js\\checkoutRegistration.js'");
+"use strict";
+
+
+var formValidation = __webpack_require__(/*! ./components/formValidation */ "./cartridges/app_newcartridge_custom/cartridge/client/default/js/components/formValidation.js");
+
+$(document).ready(function () {
+  $('form.checkout-registration').submit(function (e) {
+    var form = $(this);
+    e.preventDefault();
+    var url = form.attr('action');
+    form.spinner().start();
+    $.ajax({
+      url: url,
+      type: 'post',
+      dataType: 'json',
+      data: form.serialize(),
+      success: function success(data) {
+        form.spinner().stop();
+
+        if (!data.success) {
+          formValidation(form, data);
+        } else {
+          location.href = data.redirectUrl;
+        }
+      },
+      error: function error(err) {
+        if (err.responseJSON.redirectUrl) {
+          window.location.href = err.responseJSON.redirectUrl;
+        }
+
+        form.spinner().stop();
+      }
+    });
+    return false;
+  });
+});
+
+/***/ }),
+
+/***/ "./cartridges/app_newcartridge_custom/cartridge/client/default/js/components/formValidation.js":
+/*!*****************************************************************************************************!*\
+  !*** ./cartridges/app_newcartridge_custom/cartridge/client/default/js/components/formValidation.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Remove all validation. Should be called every time before revalidating form
+ * @param {element} form - Form to be cleared
+ * @returns {void}
+ */
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function clearFormErrors(form) {
+  $(form).find('.form-control.is-invalid').removeClass('is-invalid');
+}
+
+module.exports = function (formElement, payload) {
+  // clear form validation first
+  clearFormErrors(formElement);
+  $('.alert', formElement).remove();
+
+  if (_typeof(payload) === 'object' && payload.fields) {
+    Object.keys(payload.fields).forEach(function (key) {
+      if (payload.fields[key]) {
+        var feedbackElement = $(formElement).find('[name="' + key + '"]').parent().children('.invalid-feedback');
+
+        if (feedbackElement.length > 0) {
+          if (Array.isArray(payload[key])) {
+            feedbackElement.html(payload.fields[key].join('<br/>'));
+          } else {
+            feedbackElement.html(payload.fields[key]);
+          }
+
+          feedbackElement.siblings('.form-control').addClass('is-invalid');
+        }
+      }
+    });
+  }
+
+  if (payload && payload.error) {
+    var form = $(formElement).prop('tagName') === 'FORM' ? $(formElement) : $(formElement).parents('form');
+    form.prepend('<div class="alert alert-danger" role="alert">' + payload.error.join('<br/>') + '</div>');
+  }
+};
 
 /***/ })
 
