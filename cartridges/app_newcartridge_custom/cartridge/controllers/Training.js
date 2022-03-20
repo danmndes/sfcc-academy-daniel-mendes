@@ -18,7 +18,8 @@ server.get("Show", consentTracking.consent, server.middleware.https, csrfProtect
     res.render("trainingform", {
         title: Resource.msg("training.form.title.submit", "forms", null),
         profileForm: profileForm,
-        actionUrl: URLUtils.url("Training-SubmitRegistration").toString()
+        actionUrl: URLUtils.url("Training-SubmitRegistration").toString(),
+        titlePayment: Resource.msg("training.form.title.payment", "forms", null)
     });
 
     next();
@@ -34,7 +35,7 @@ server.post(
         var URLUtils = require("dw/web/URLUtils");
         var profileForm = server.forms.getForm("training");
         res.render("trainingform", {
-            title: Resource.msg("training.form.title.edit", "forms", null),
+            title: Resource.msg("training.form.title.payment", "forms", null),
             profileForm: profileForm,
             actionUrl: URLUtils.url("Training-SubmitRegistration").toString()
         });

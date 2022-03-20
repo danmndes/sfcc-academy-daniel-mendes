@@ -1,44 +1,70 @@
 <form xmlns="http://www.demandware.com/xml/form/2008-04-19" secure="false">
-	<group formid="customer">
-		<field
-			formid="firstname"
-			label="label.input.firstname.profile"
-			mandatory="true"
-			max-length="50"
-			missing-error="error.message.required"
-			range-error="error.message.50orless"
-			type="string" />
+    <group formid="customer">
+        <field formid="firstname" label="label.input.firstname.profile" mandatory="true" max-length="50" missing-error="error.message.required" range-error="error.message.50orless" type="string" />
 
-		<field
-			formid="lastname"
-			label="label.input.lastname.profile"
-			mandatory="true"
-			max-length="50"
-			missing-error="error.message.required"
-			range-error="error.message.50orless"
-			type="string" />
+        <field formid="lastname" label="label.input.lastname.profile" mandatory="true" max-length="50" missing-error="error.message.required" range-error="error.message.50orless" type="string" />
 
-		<field
-			formid="email"
-			label="label.input.email.profile"
-			mandatory="true"
-			max-length="50"
-			missing-error="error.message.required"
-			parse-error="error.message.parse.email.profile.form"
-			range-error="error.message.50orless"
-			regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$"
-			value-error="ValueErrorText"
-			type="string"/>
+        <field formid="address1" label="label.input.address1" type="string" mandatory="true" binding="address1" max-length="50" missing-error="address.address1.missing" range-error="error.message.50orless"/>
 
-            <field
-			formid="Age"
-			label="label.input.Age.profile"
-			mandatory="true"
-			max-length="3"
-			missing-error="error.message.required"
-			range-error="error.message.50orless"
-			type="number" />
-            
-			<!-- TODO value-error not comming back from the platform -->
+        <field formid="address2" label="label.input.address2" type="string" mandatory="false" binding="address2" max-length="50" range-error="error.message.50orless"/>
+
+        <!--Country-->
+        <field formid="country" label="label.input.country" type="string" mandatory="true" binding="countryCode" missing-error="address.country.missing">
+            <options>
+                <option optionid="" label="" value=""/>
+                <option optionid="US" label="select.option.country.unitedstates" value="US"/>
+            </options>
+        </field>
+
+        <!-- use global state list -->
+        <include formid="states" name="states" missing-error="address.state.missing" parse-error="error.message.required" value-error="error.message.required"/>
+
+        <!--  postal code -->
+        <field formid="postalCode" label="label.input.zipcode" description="example.postalcode" type="string" mandatory="true" min-length="5" max-length="10" regexp="(^\d{5}(-\d{4})?$)|(^[abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$)" binding="postalCode" range-error="error.message.between5and10" missing-error="address.zipcode.missing" parse-error="error.message.parse.zip"/>
+
+        <!--  Phone -->
+        <field formid="phone" label="label.input.phonenumber" description="example.phone" type="string" mandatory="true" binding="phone" min-length="10" max-length="20" missing-error="address.phone.missing" range-error="error.message.between10and20" parse-error="error.message.parse.phone"/>
+
+        <!--  Comments -->
+        <field formid="comments" label="label.input.comment" type="string" mandatory="false" binding="comments" min-length="10" max-length="15"/>
+
+        <!-- TODO value-error not comming back from the platform -->
+
+        <field formid="cardNumber" label="label.input.creditcard.number" type="string" mandatory="true" binding="cardNumber" max-length="20" missing-error="payment.card.number.missing" parse-error="error.message.required" />
+
+        <field formid="expirationMonth" label="label.input.payment.expirationmonth" type="integer" mandatory="true" binding="expirationMonth" missing-error="payment.card.month.missing" value-error="address.field.invalid">
+            <options>
+                <option optionid="" label="select.default.month" value=""/>
+                <option optionid="01" label="01" value="01"/>
+                <option optionid="02" label="02" value="02"/>
+                <option optionid="03" label="03" value="03"/>
+                <option optionid="04" label="04" value="04"/>
+                <option optionid="05" label="05" value="05"/>
+                <option optionid="06" label="06" value="06"/>
+                <option optionid="07" label="07" value="07"/>
+                <option optionid="08" label="08" value="08"/>
+                <option optionid="09" label="09" value="09"/>
+                <option optionid="10" label="10" value="10"/>
+                <option optionid="11" label="11" value="11"/>
+                <option optionid="12" label="12" value="12"/>
+            </options>
+        </field>
+
+        <field formid="expirationYear" label="label.input.payment.expirationyear" type="integer" mandatory="true" missing-error="payment.card.year.missing">
+            <options>
+                <option optionid="" label="select.default.year" value=""/>
+                <option optionid="22" label="2022" value="22"/>
+                <option optionid="23" label="2023" value="23"/>
+                <option optionid="24" label="2024" value="24"/>
+                <option optionid="25" label="2025" value="25"/>
+            </options>
+        </field>
+
+        <field formid="securityCode" label="profile.securitycode" type="string" mandatory="true" binding="securityCode" max-length="4" missing-error="error.card.info.missing.securityCode" />
+
+        <field formid="email" label="label.input.email.profile" type="string" mandatory="true" binding="email" max-length="4" />
+
+        <field formid="saveCard" label="label.save.card" binding="saveCard" type="boolean" mandatory="false" checked="true" />
+        <field formid="charactersleft" label="label.charactersleft" binding="charactersleft" type="string" />
     </group>
 </form>
