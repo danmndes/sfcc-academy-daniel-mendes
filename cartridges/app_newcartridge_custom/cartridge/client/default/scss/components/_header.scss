@@ -8,11 +8,8 @@ $menu-item-margin: 0.625em;
     position: relative;
 }
 
-
-
 .navbar-header {
-    height: 4.375em;
-    /* 70/16 */
+    height: 4.375em; /* 70/16 */
 
     .user,
     .country-selector,
@@ -26,8 +23,7 @@ $menu-item-margin: 0.625em;
     .country-selector,
     .minicart,
     .navbar-toggler {
-        line-height: 2.25em;
-        /* 36/16 */
+        line-height: 2.25em; /* 36/16 */
         height: auto;
     }
 
@@ -77,16 +73,13 @@ $menu-item-margin: 0.625em;
     }
 
     @include media-breakpoint-up(lg) {
-        width: 14.125em;
-        /* 226/16 */
-        margin-left: -7.0625em;
-        /* 113/16 */
+        width: 14.125em; /* 226/16 */
+        margin-left: -7.0625em; /* 113/16 */
         padding-top: 0.5em;
     }
 
     @include media-breakpoint-down(md) {
-        width: 4em;
-        /* 64/16 */
+        width: 4em; /* 64/16 */
         margin-left: -2em;
         padding-top: 0.8em;
     }
@@ -128,8 +121,7 @@ $menu-item-margin: 0.625em;
 }
 
 .minicart {
-    margin-top: 0.1875em;
-    /* 3/16 */
+    margin-top: 0.1875em; /* 3/16 */
     vertical-align: top;
 
     .minicart-icon {
@@ -145,20 +137,15 @@ $menu-item-margin: 0.625em;
     .minicart-quantity {
         background-color: $primary;
         border-radius: 50%;
-        width: 1.25em;
-        /* 20/16 */
-        height: 1.25em;
-        /* 20/16 */
+        width: 1.25em; /* 20/16 */
+        height: 1.25em; /* 20/16 */
         line-height: normal;
         display: inline-block;
         text-align: center;
-        font-size: 0.8125em;
-        /* 13/16 */
+        font-size: 0.8125em; /* 13/16 */
         position: relative;
-        top: -0.9375em;
-        /* 15/16 */
-        left: -0.9375em;
-        /* 15/16 */
+        top: -0.9375em; /* 15/16 */
+        left: -0.9375em; /* 15/16 */
         color: $white;
     }
 }
@@ -207,11 +194,4 @@ a.normal {
         margin-bottom: 0.2em;
         padding-right: 2em;
     }
-}
-
-.sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1020;
 }

@@ -4,6 +4,7 @@
 @import "utilities/deleteCardButton";
 @import "components/quickView";
 
+
 html {
     scroll-behavior: smooth;
 }
@@ -42,5 +43,10 @@ html {
 .my-form-header {
     height: 4.375em;
     align-items: center !important;
-    background-color: white;
+    background-color: #FFF;
+}
+
+.required::before {
+    content: "*";
+    color: #c00;
 }

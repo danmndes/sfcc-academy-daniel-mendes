@@ -19,7 +19,7 @@ server.get("Show", consentTracking.consent, server.middleware.https, csrfProtect
         title: Resource.msg("training.form.title.submit", "forms", null),
         profileForm: profileForm,
         actionUrl: URLUtils.url("Training-SubmitRegistration").toString(),
-        title2: Resource.msg("training.form.title.payment", "forms", null)
+        titlePayment: Resource.msg("training.form.title.payment", "forms", null)
     });
 
     next();

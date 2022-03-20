@@ -15334,13 +15334,6 @@ a.normal {
   padding-right: 2em;
 }
 
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  z-index: 1020;
-}
-
 @media (max-width: 543.98px) {
   .collapsible-xs .title {
     line-height: 2.5rem;
@@ -18276,7 +18269,12 @@ html {
 .my-form-header {
   height: 4.375em;
   align-items: center !important;
-  background-color: white;
+  background-color: #FFF;
+}
+
+.required::before {
+  content: "*";
+  color: #c00;
 }
 
 /* 20/16 */

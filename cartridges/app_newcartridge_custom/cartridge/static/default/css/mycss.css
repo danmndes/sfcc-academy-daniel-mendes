@@ -692,6 +692,11 @@ div.availability {
   margin-bottom: 0.5rem;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* PROMOCODE CART */
 .promo-code-form-custom {
   visibility: hidden;
 }
@@ -707,6 +712,28 @@ div.availability {
 
 #hide:checked + label {
   display: none;
+}
+
+/* TRAINING FORM */
+#homeFormButton {
+  width: 40px;
+  height: 40px;
+}
+
+#homeFormButton a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.my-form-header {
+  height: 4.375em;
+  align-items: center !important;
+  background-color: #FFF;
+}
+
+.required::before {
+  content: "*";
+  color: #c00;
 }
 
 /*# sourceMappingURL=myCss.css.map*/

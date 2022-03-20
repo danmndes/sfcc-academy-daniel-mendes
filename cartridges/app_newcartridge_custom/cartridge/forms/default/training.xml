@@ -53,12 +53,18 @@
         <field formid="expirationYear" label="label.input.payment.expirationyear" type="integer" mandatory="true" missing-error="payment.card.year.missing">
             <options>
                 <option optionid="" label="select.default.year" value=""/>
+                <option optionid="22" label="2022" value="22"/>
+                <option optionid="23" label="2023" value="23"/>
+                <option optionid="24" label="2024" value="24"/>
+                <option optionid="25" label="2025" value="25"/>
             </options>
         </field>
 
         <field formid="securityCode" label="profile.securitycode" type="string" mandatory="true" binding="securityCode" max-length="4" missing-error="error.card.info.missing.securityCode" />
 
-        <field formid="saveCard" label="label.save.card" binding="saveCard" type="boolean" mandatory="false" checked="true" />
+        <field formid="email" label="label.input.email.profile" type="string" mandatory="true" binding="email" max-length="4" />
 
+        <field formid="saveCard" label="label.save.card" binding="saveCard" type="boolean" mandatory="false" checked="true" />
+        <field formid="charactersleft" label="label.charactersleft" binding="charactersleft" type="string" />
     </group>
 </form>
