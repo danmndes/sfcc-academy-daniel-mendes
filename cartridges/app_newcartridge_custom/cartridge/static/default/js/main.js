@@ -2886,7 +2886,7 @@ $('.optional-promo-custom').click(function (e) {
     $('.promo-code-form-custom').toggle();
     $('.optional-promo-custom').toggle();
 });
-############ using only css now */
+############ using only css now*/
 
 /***/ }),
 

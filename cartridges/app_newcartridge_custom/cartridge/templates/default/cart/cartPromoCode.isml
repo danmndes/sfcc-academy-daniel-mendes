@@ -1,6 +1,8 @@
 <div class="row">
     <div class="col-12 d-sm-none">
-        <p class="optional-promo-custom">${Resource.msg('label.show.coupon', 'cart', null)}</p>
+        <a href="#">
+            <p class="optional-promo-custom">${Resource.msg('label.show.coupon', 'cart', null)}</p>
+        </a>
     </div>
 </div>
 <div class="row">
